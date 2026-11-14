@@ -229,13 +229,7 @@ require __DIR__ . '/inc/header.php';
             <div class="contact-band__copy" data-reveal>
                 <p class="eyebrow"><span class="eyebrow__num">06</span> <span data-i18n="home.contact.eyebrow">Get in touch</span></p>
                 <h2 id="home-contact-title" data-i18n="home.contact.title">Let's talk about your next order.</h2>
-                <p data-i18n="home.contact.copy">We are based in Dubai, UAE. Reach us by email — we respond quickly.</p>
-                <div class="contact-band__actions">
-                    <a class="btn btn--gold" href="mailto:<?= e(SITE_EMAIL) ?>">
-                        <?= icon('mail', 18) ?>
-                        <span dir="ltr"><?= e(SITE_EMAIL) ?></span>
-                    </a>
-                </div>
+                <p data-i18n="home.contact.copy">Reach us by email — we respond quickly.</p>
             </div>
             <ul class="contact-lines" data-reveal>
                 <li>

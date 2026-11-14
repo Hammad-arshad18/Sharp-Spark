@@ -98,7 +98,7 @@
         "home.stats.4.value": "الإمارات والخليج",
         "home.contact.eyebrow": "تواصل معنا",
         "home.contact.title": "لنتحدث عن طلبك القادم.",
-        "home.contact.copy": "مقرّنا في دبي، الإمارات. تواصل معنا عبر البريد — نرد بسرعة.",
+        "home.contact.copy": "تواصل معنا عبر البريد — نرد بسرعة.",
         "home.contact.map": "الموقع",
 
         "activity.0.title": "التوريد والمشتريات",
