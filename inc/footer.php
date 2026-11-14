@@ -8,15 +8,6 @@
                 <p class="footer-note" data-i18n="footer.note">A Dubai-based general trading company serving the UAE and selected GCC markets.</p>
                 <p class="footer-license"><?= icon('shield', 18) ?> <span data-i18n="footer.license">Licensed by Dubai DED</span></p>
             </div>
-
-            <div class="footer-contact">
-                <h2 class="footer-heading" data-i18n="footer.contact.heading">Office &amp; contact</h2>
-                <address class="footer-contact__address" data-i18n="address"><?= e(SITE_ADDRESS) ?></address>
-                <p class="footer-contact__line">
-                    <span class="footer-contact__label" data-i18n="contact.fact.email">Email</span>
-                    <a href="mailto:<?= e(SITE_EMAIL) ?>" dir="ltr"><?= e(SITE_EMAIL) ?></a>
-                </p>
-            </div>
         </div>
 
         <div class="footer-grid">
@@ -42,7 +33,6 @@
                 <h2 class="footer-heading" data-i18n="footer.compliance">Compliance</h2>
                 <ul>
                     <li><span data-i18n="about.fact.legal.value"><?= e(LEGAL_FORM) ?></span></li>
-                    <li><span data-i18n="about.fact.license.value"><?= e(LICENSE_AUTHORITY) ?></span></li>
                     <li><span data-i18n="about.fact.established">Established</span> <span dir="ltr"><?= e(ESTABLISHED) ?></span></li>
                 </ul>
             </div>
