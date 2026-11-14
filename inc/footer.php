@@ -1,15 +1,5 @@
 <footer class="site-footer">
     <div class="shell">
-        <div class="footer-top">
-            <div class="footer-brand">
-                <a class="footer-logo-link" href="./" aria-label="Sharp Spark — Home">
-                    <img class="footer-logo" src="assets/img/logo-footer.png" width="700" height="612" alt="Sharp Spark — General Trading L.L.C">
-                </a>
-                <p class="footer-note" data-i18n="footer.note">A Dubai-based general trading company serving the UAE and selected GCC markets.</p>
-                <p class="footer-license"><?= icon('shield', 18) ?> <span data-i18n="footer.license">Licensed by Dubai DED</span></p>
-            </div>
-        </div>
-
         <div class="footer-grid">
             <nav class="footer-col" aria-label="Footer">
                 <h2 class="footer-heading" data-i18n="footer.explore">Explore</h2>
