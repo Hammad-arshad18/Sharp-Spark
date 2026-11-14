@@ -1,0 +1,85 @@
+# Sharp Spark — Apache front controller
+DirectoryIndex index.php
+Options -Indexes -MultiViews
+
+# ---------------------------------------------------------------------------
+# Security headers
+# ---------------------------------------------------------------------------
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    Header unset X-Powered-By
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# Compress text assets
+# ---------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/json image/svg+xml
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# Cache static files (fingerprinting not used; keep TTL modest)
+# ---------------------------------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 day"
+    ExpiresByType text/css "access plus 1 day"
+    ExpiresByType application/javascript "access plus 1 day"
+    ExpiresByType image/jpeg "access plus 1 day"
+    ExpiresByType image/png "access plus 1 day"
+    ExpiresByType image/webp "access plus 1 day"
+    ExpiresByType image/svg+xml "access plus 1 day"
+    ExpiresByType font/woff2 "access plus 1 day"
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# Routing & protection
+# ---------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Force HTTPS (skip local / CLI)
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTP_HOST} !^localhost(:\d+)?$ [NC]
+    RewriteCond %{HTTP_HOST} !^127\.0\.0\.1(:\d+)?$
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Block direct access to private paths
+    RewriteRule ^inc(/|$) - [F,L]
+    RewriteRule ^design-system(/|$) - [F,L]
+    RewriteRule ^router\.php$ - [F,L]
+
+    # Block hidden files (allow ACME / well-known)
+    RewriteRule (^|/)\.(?!well-known(?:/|$)) - [F,L]
+
+    # Canonical: index.php → /
+    RewriteRule ^index\.php$ / [R=301,L,NC,QSA]
+
+    # Canonical: public pages → extensionless URLs
+    RewriteRule ^(about|trade|contact)\.php$ /$1 [R=301,L,NC,QSA]
+
+    # Canonical: drop trailing slash on pages
+    RewriteRule ^(about|trade|contact)/$ /$1 [R=301,L,QSA]
+
+    # Serve real files and directories (assets, etc.)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Clean routes
+    RewriteRule ^about/?$ about.php [L,QSA]
+    RewriteRule ^trade/?$ trade.php [L,QSA]
+    RewriteRule ^contact/?$ contact.php [L,QSA]
+    RewriteRule ^$ index.php [L,QSA]
+
+    # Everything else → branded 404
+    RewriteRule ^ 404.php [L]
+</IfModule>
+
+ErrorDocument 404 /404.php
